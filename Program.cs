@@ -11,6 +11,8 @@ namespace task0
 		static void Main(string[] args)
 		{
 			Console.OutputEncoding = System.Text.Encoding.Default;
+			Console.BackgroundColor = ConsoleColor.DarkYellow;
+			Console.ForegroundColor = ConsoleColor.Magenta;
 
 			const double cashPercent = 0.4;
 			string[] strings;
@@ -39,12 +41,12 @@ namespace task0
 
 				Console.WriteLine("Стипендіати:");
 				int i = 0;
-				for (; i < Math.Round(budg.Count * cashPercent); i++)
+				for (; i < Math.Floor(budg.Count * cashPercent); i++)
 				{
 					Student s = budg[i];
-					Console.WriteLine($"{i + 1}.\t{s.Name.PadRight(20)}{s.Average}");
+					Console.WriteLine($"{i + 1}.\t{s.Name.PadRight(20)}{s.Average.ToString("0.000")}");
 				}
-				Console.WriteLine("\nПрохідний бал: " + budg[i - 1].Average);
+				Console.WriteLine("\nПрохідний бал: " + budg[i - 1].Average.ToString("0.000"));
 				Console.WriteLine("\nExecution time:\t" + t.ElapsedMilliseconds + "ms.");
 				Console.WriteLine("Memory: " + System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64.ToString("#,0"));
 			}
