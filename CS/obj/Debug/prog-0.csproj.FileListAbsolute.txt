@@ -1,7 +1,0 @@
-D:\kpi-repos\prog-0\bin\Debug\prog-0.exe.config
-D:\kpi-repos\prog-0\bin\Debug\prog-0.exe
-D:\kpi-repos\prog-0\bin\Debug\prog-0.pdb
-D:\kpi-repos\prog-0\obj\Debug\prog-0.csprojResolveAssemblyReference.cache
-D:\kpi-repos\prog-0\obj\Debug\prog-0.csproj.CoreCompileInputs.cache
-D:\kpi-repos\prog-0\obj\Debug\prog-0.exe
-D:\kpi-repos\prog-0\obj\Debug\prog-0.pdb
