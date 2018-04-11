@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace task0
 {
@@ -11,8 +12,6 @@ namespace task0
 		static void Main(string[] args)
 		{
 			Console.OutputEncoding = System.Text.Encoding.Default;
-			//Console.BackgroundColor = ConsoleColor.DarkYellow;
-			//Console.ForegroundColor = ConsoleColor.Magenta;
 
 			const double cashPercent = 0.4;
 			string[] strings;
@@ -21,7 +20,7 @@ namespace task0
 			OpenFileDialog ofd = new OpenFileDialog();
 			if (ofd.ShowDialog() == DialogResult.OK)
 			{
-				System.Diagnostics.Stopwatch t = System.Diagnostics.Stopwatch.StartNew();
+				Stopwatch t = Stopwatch.StartNew();
 				string path = Path.GetDirectoryName(ofd.FileName);
 				strings = File.ReadAllLines(ofd.FileName);
 				int count = Int32.Parse(strings[0]);
@@ -30,7 +29,7 @@ namespace task0
 					students.Add(new Student(strings[s]));
 				}
 
-				List<Student> budg = new List<Student>(); //budget and honest guys
+				List<Student> budg = new List<Student>();
 				students.ForEach((s) =>
 				{
 					if (!s.IsContract)
@@ -41,14 +40,24 @@ namespace task0
 
 				Console.WriteLine("Стипендіати:");
 				int i = 0;
+
+				Console.WriteLine(path);
+				StreamWriter streamWriter = new StreamWriter(path + "\\result.csv");
 				for (; i < Math.Floor(budg.Count * cashPercent); i++)
 				{
 					Student s = budg[i];
-					Console.WriteLine($"{i + 1}.\t{s.Name.PadRight(20)}{s.Average.ToString("0.000")}");
+					string line = $"{i + 1}.\t{s.Name.PadRight(20)}{s.Average.ToString("0.000")}";
+
+					streamWriter.WriteLine(line);
+					Console.WriteLine(line);
 				}
+				streamWriter.WriteLine("\nПрохідний бал: " + budg[i - 1].Average.ToString("0.000"));
+				streamWriter.Close();
+
+
 				Console.WriteLine("\nПрохідний бал: " + budg[i - 1].Average.ToString("0.000"));
 				Console.WriteLine("\nExecution time:\t" + t.ElapsedMilliseconds + "ms.");
-				Console.WriteLine("Memory: " + System.Diagnostics.Process.GetCurrentProcess().PrivateMemorySize64.ToString("#,0"));
+				Console.WriteLine("Memory used: " + Process.GetCurrentProcess().PrivateMemorySize64.ToString("#,0"));
 			}
 			Console.ReadKey();
 		}
